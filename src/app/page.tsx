@@ -1,17 +1,17 @@
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6 py-16 text-white">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-[#0b1430] via-[#0a0f1f] to-[#04060f] px-6 py-16 text-white">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-cyan-400/50 via-sky-500/40 to-indigo-600/50 blur-3xl" />
-        <div className="absolute -bottom-48 left-1/3 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-fuchsia-400/40 via-pink-500/35 to-amber-400/30 blur-3xl" />
-        <div className="absolute top-1/4 right-[-6rem] h-[22rem] w-[22rem] rounded-full bg-gradient-to-tr from-emerald-400/35 via-teal-500/30 to-cyan-500/35 blur-3xl" />
-        <div className="absolute inset-0 bg-slate-950/70" />
+        <div className="absolute -top-40 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-sky-500/35 via-blue-600/30 to-indigo-700/35 blur-3xl" />
+        <div className="absolute -bottom-52 left-1/3 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-500/25 via-blue-700/25 to-cyan-500/25 blur-3xl" />
+        <div className="absolute top-1/4 right-[-7rem] h-[24rem] w-[24rem] rounded-full bg-gradient-to-tr from-cyan-400/25 via-sky-500/25 to-indigo-600/25 blur-3xl" />
+        <div className="absolute inset-0 bg-slate-950/60" />
       </div>
 
       <div className="relative z-10 w-full max-w-2xl">
         <div className="rounded-3xl border border-white/15 bg-white/10 p-8 shadow-[0_40px_120px_-60px_rgba(15,23,42,0.9)] backdrop-blur-2xl sm:p-12">
           <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/80">
-            Coming Soon
+            COMING SOON
           </span>
 
           <div className="mt-6 space-y-4">
@@ -38,15 +38,11 @@ export default function Home() {
             />
             <button
               type="button"
-              className="h-12 rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
+              className="h-12 rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
             >
               Notify me
             </button>
           </div>
-
-          <p className="mt-4 text-xs text-white/60">
-            Launching soon. No spam.
-          </p>
         </div>
       </div>
     </main>
