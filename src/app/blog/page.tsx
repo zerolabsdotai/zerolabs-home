@@ -36,6 +36,12 @@ export default function BlogPage() {
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-20 sm:py-24">
         <section className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div className="space-y-6">
+            <Link
+              href="/"
+              className="inline-flex w-fit items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/70 transition hover:border-white/30 hover:text-white"
+            >
+              Back to Home
+            </Link>
             <p className="text-xs uppercase tracking-[0.35em] text-white/70">
               ZERO LABS BLOG
             </p>
