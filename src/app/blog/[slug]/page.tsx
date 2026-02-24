@@ -80,6 +80,13 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               >
                 Back to blog
               </Link>
+              <span className="text-white/40">/</span>
+              <Link
+                href="/"
+                className="transition hover:text-white/90"
+              >
+                Home
+              </Link>
               <span className="h-1 w-6 rounded-full bg-cyan-400/80" />
               <span>{post.date}</span>
             </div>
