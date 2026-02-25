@@ -5,16 +5,38 @@ import { notFound } from "next/navigation";
 
 import { getPostBySlug, getPostSlugs } from "@/lib/blog";
 
+type BlogPostPageParams = { slug: string };
+
 type BlogPostPageProps = {
-  params: { slug: string };
+  params: BlogPostPageParams | Promise<BlogPostPageParams>;
 };
 
-export function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+async function resolveParams(
+  params: BlogPostPageProps["params"]
+): Promise<BlogPostPageParams> {
+  return Promise.resolve(params);
 }
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
-  const post = getPostBySlug(params.slug);
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  const slugs = getPostSlugs();
+  const hasHelloZeroLabs = slugs.includes("hello-zero-labs");
+
+  console.info("[blog] generateStaticParams slugs:", slugs);
+  if (!hasHelloZeroLabs) {
+    console.warn("[blog] Missing expected slug: hello-zero-labs");
+  }
+
+  return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await resolveParams(params);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -54,8 +76,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await resolveParams(params);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
