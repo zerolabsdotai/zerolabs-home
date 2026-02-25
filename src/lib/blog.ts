@@ -10,7 +10,32 @@ export type BlogPost = {
   content: string;
 };
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+function resolveBlogDir() {
+  let currentDir = process.cwd();
+
+  for (let depth = 0; depth < 5; depth += 1) {
+    const candidate = path.join(currentDir, "content", "blog");
+    if (fs.existsSync(candidate)) {
+      if (depth > 0) {
+        console.info(`[blog] Resolved content directory at ${candidate}`);
+      }
+      return candidate;
+    }
+
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) {
+      break;
+    }
+    currentDir = parentDir;
+  }
+
+  console.warn(
+    `[blog] Content directory not found from cwd ${process.cwd()}.`
+  );
+  return path.join(process.cwd(), "content", "blog");
+}
+
+const BLOG_DIR = resolveBlogDir();
 
 function toSafeSlug(slug: string) {
   return slug.replace(/\.mdx$/, "").replace(/[\\/]/g, "");
