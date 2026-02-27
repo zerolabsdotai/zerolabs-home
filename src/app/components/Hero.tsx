@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+    <section className="space-y-8 sm:space-y-10">
       <div className="space-y-6">
         <p className="text-xs uppercase tracking-[0.35em] text-white/60">
           Zero Labs Platform
@@ -29,67 +28,9 @@ export default function Hero() {
             Explore the blog
           </Link>
         </div>
-        <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.25em] text-white/50">
-          <div className="flex -space-x-2">
-            <Image
-              src="/brand/Avatars/Dark%20-%20PNG/Avatar-Dark-64.png"
-              alt="Operator avatar"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-full border border-white/20"
-            />
-            <Image
-              src="/brand/Avatars/Dark%20-%20PNG/Avatar-Dark-128.png"
-              alt="Operator avatar"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-full border border-white/20"
-            />
-            <Image
-              src="/brand/Avatars/Dark%20-%20PNG/Avatar-Dark-256.png"
-              alt="Operator avatar"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-full border border-white/20"
-            />
-          </div>
-          <span>Trusted by teams shipping AI weekly</span>
-        </div>
       </div>
-
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_-70px_rgba(15,23,42,0.9)] backdrop-blur-2xl sm:p-8">
-        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-          Live operations stack
-        </p>
-        <div className="mt-6 space-y-4 text-sm text-white/70">
-          <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
-            <span className="mt-2 h-2 w-2 rounded-full bg-cyan-400/80" />
-            <div>
-              <p className="text-white">Agent orchestration</p>
-              <p className="text-white/60">
-                Route tasks across multi-agent pipelines with guardrails.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
-            <span className="mt-2 h-2 w-2 rounded-full bg-sky-300/80" />
-            <div>
-              <p className="text-white">Real-time observability</p>
-              <p className="text-white/60">
-                Trace costs, latency, and outcomes across every run.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
-            <span className="mt-2 h-2 w-2 rounded-full bg-indigo-300/80" />
-            <div>
-              <p className="text-white">Compliance-ready control</p>
-              <p className="text-white/60">
-                Enforce policies, audits, and approvals in one place.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="text-xs uppercase tracking-[0.3em] text-white/50">
+        Orchestration · Observability · Compliance
       </div>
     </section>
   );
