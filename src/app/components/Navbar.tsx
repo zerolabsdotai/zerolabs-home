@@ -1,112 +1,123 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import type { KeyboardEvent } from "react";
 
-const menuLinks = [
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
   { label: "Articles", href: "/articles" },
-  { label: "Contact", href: "/contact" },
+  { label: "Login/Signup", href: "/login" },
+];
+
+const brandHighlights = [
+  {
+    title: "About",
+    description:
+      "Zero Labs builds the control plane for reliable, observable AI operations.",
+  },
+  {
+    title: "Mission",
+    description:
+      "Make AI workflows governed, measurable, and dependable across every team.",
+  },
+  {
+    title: "Vision",
+    description:
+      "A future where AI runs safely, predictably, and at scale for everyone.",
+  },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const isAuthed = false; // TODO: Replace with auth hook/provider.
+  const [overlayOpen, setOverlayOpen] = useState(false);
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
+  const toggleOverlay = () => {
+    setOverlayOpen((prev) => !prev);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleOverlay();
     }
-
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!menuRef.current) {
-        return;
-      }
-      if (!menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
+  };
 
   return (
-    <header className="relative w-full">
-      <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-[0_40px_120px_-70px_rgba(15,23,42,0.9)]">
-        <Image
-          src="/brand/Banners/zerolabs-banner-dark-base.png"
-          alt="Zero Labs banner"
-          width={1500}
-          height={500}
-          priority
-          className="h-auto w-full object-contain"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070b19]/60 via-transparent to-[#070b19]/50" />
-      </div>
-
-      <div
-        ref={menuRef}
-        className="absolute right-4 top-4 flex items-center sm:right-6 sm:top-6"
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-haspopup="menu"
-          aria-expanded={isOpen}
-          className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/40 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.9)] backdrop-blur-sm transition hover:border-white/30 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-        >
-          <span className="sr-only">Toggle menu</span>
-          <Image
-            src="/brand/Avatars/Dark%20-%20PNG/Avatar-Dark-64.png"
-            alt="Zero Labs menu"
-            width={28}
-            height={28}
-            className="rounded-full"
-          />
-        </button>
-
-        {isOpen ? (
-          <div
-            className="absolute right-0 top-12 w-48 rounded-2xl border border-white/10 bg-slate-950/90 p-2 text-sm text-white/70 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.95)] backdrop-blur-xl"
-            role="menu"
-          >
-            {menuLinks.map((link) => (
+    <header className="flex w-full flex-col gap-4">
+      <div className="flex flex-col gap-4 border-b border-white/10 pb-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/brand/Logos/zerolabs-primary-light.png.png"
+              alt="Zero Labs"
+              width={120}
+              height={28}
+              sizes="120px"
+              className="h-7 w-auto object-contain"
+              priority
+            />
+          </Link>
+          <nav className="flex flex-wrap items-center gap-3 text-xs text-white/70 sm:text-sm">
+            {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                role="menuitem"
-                onClick={() => setIsOpen(false)}
-                className="block rounded-xl px-3 py-2 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                className="rounded-full border border-transparent px-3 py-1 transition hover:border-white/20 hover:bg-white/5 hover:text-white"
               >
                 {link.label}
               </Link>
             ))}
-            <button
-              type="button"
-              role="menuitem"
-              onClick={() => setIsOpen(false)}
-              className="mt-1 w-full rounded-xl px-3 py-2 text-left transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-            >
-              {isAuthed ? "Sign out" : "Login/Sign up"}
-            </button>
+          </nav>
+        </div>
+
+        <div className="w-full md:w-auto">
+          <input
+            type="search"
+            placeholder="Search"
+            className="h-9 w-full rounded-full border border-white/10 bg-white/5 px-4 text-xs text-white/80 placeholder:text-white/40 transition focus:border-white/40 focus:outline-none md:w-56"
+          />
+        </div>
+      </div>
+
+      <div
+        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+        onMouseEnter={() => setOverlayOpen(true)}
+        onMouseLeave={() => setOverlayOpen(false)}
+        onClick={toggleOverlay}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-expanded={overlayOpen}
+      >
+        <div className="relative w-full aspect-[3/1]">
+          <Image
+            src="/brand/Banners/zerolabs-banner-dark-base.png"
+            alt="Zero Labs banner"
+            fill
+            sizes="100vw"
+            className="object-contain"
+            priority
+          />
+        </div>
+        <div
+          className={`pointer-events-none absolute inset-0 flex items-end p-4 transition duration-200 ${
+            overlayOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+          }`}
+        >
+          <div className="max-w-sm space-y-3 rounded-xl border border-white/10 bg-slate-950/80 p-4 text-white/75 backdrop-blur">
+            {brandHighlights.map((item) => (
+              <div key={item.title} className="space-y-1">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/70">
+                  {item.title}
+                </p>
+                <p className="text-xs text-white/70">{item.description}</p>
+              </div>
+            ))}
           </div>
-        ) : null}
+        </div>
       </div>
     </header>
   );

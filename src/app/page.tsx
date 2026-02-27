@@ -14,7 +14,7 @@ export default function Home() {
       <div className="relative z-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-24 pt-12 sm:pt-16">
           <Navbar />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-12 space-y-16 sm:mt-16">
             <Hero />
           </div>
         </div>
