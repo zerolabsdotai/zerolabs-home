@@ -17,7 +17,7 @@ export default function Home() {
       <div className="relative z-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-20 pt-10 sm:pt-12">
           <Navbar />
-          <div className="mt-16 space-y-16 sm:mt-20">
+          <div className="mt-10 space-y-16 sm:mt-12">
             <Hero />
             <FeaturePills />
             <ProductPreview />
