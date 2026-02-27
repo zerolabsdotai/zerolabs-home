@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex flex-col gap-4">
+    <header className="flex w-full flex-col gap-4">
       <div className="flex flex-col gap-4 border-b border-white/10 pb-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
           <Link href="/" className="flex items-center">
@@ -83,7 +83,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className="relative cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5"
         onMouseEnter={() => setOverlayOpen(true)}
         onMouseLeave={() => setOverlayOpen(false)}
         onClick={toggleOverlay}
