@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --zl-snow: #ffffff;
+  --zl-ink: #1f2428;
+  --zl-steel: #2f4e6b;
+  --zl-mist: #e6ebee;
+  --zl-ash: #a7b0b7;
+  --zl-cloud: #d9d9d9;
+  --zl-accent: #8a38f5;
+
+  --zl-ink-80: rgba(31, 36, 40, 0.8);
+  --zl-ink-70: rgba(31, 36, 40, 0.7);
+  --zl-ink-60: rgba(31, 36, 40, 0.6);
+  --zl-ink-40: rgba(31, 36, 40, 0.4);
+  --zl-ink-20: rgba(31, 36, 40, 0.2);
+  --zl-ink-15: rgba(31, 36, 40, 0.15);
+  --zl-ink-10: rgba(31, 36, 40, 0.1);
+  --zl-mist-80: rgba(230, 235, 238, 0.8);
+  --zl-mist-40: rgba(230, 235, 238, 0.4);
+  --zl-mist-08: rgba(230, 235, 238, 0.08);
+  --zl-steel-18: rgba(47, 78, 107, 0.18);
+  --zl-ash-25: rgba(167, 176, 183, 0.25);
+
+  --zl-radius-pill: 40px;
+  --zl-radius-lg: 50px;
+  --zl-radius-xl: 150px;
+  --zl-radius-md: 30px;
+  --zl-radius-sm: 20px;
+
+  --zl-border-heavy: 50px;
+  --zl-border-strong: 10px;
+  --zl-border-medium: 5px;
+  --zl-border-thin: 2px;
+
+  --zl-shadow-soft: 0 25px 60px rgba(31, 36, 40, 0.12);
+  --zl-shadow-lift: 0 40px 90px rgba(31, 36, 40, 0.18);
+  --zl-shadow-accent: 0 30px 80px rgba(47, 78, 107, 0.25);
+
+  --background: var(--zl-snow);
+  --foreground: var(--zl-ink);
+
+  --zl-font-body: var(--font-geist-sans);
+  --zl-font-display: var(--font-lexend-zetta);
+  --zl-font-logo: var(--font-bungee-hairline);
+  --zl-font-logo-strong: var(--font-bungee);
+  --zl-font-accent: var(--font-holtwood);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--zl-font-body);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--zl-snow);
+    --foreground: var(--zl-ink);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--zl-font-body);
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--zl-font-display);
+  }
+
+  .font-logo {
+    font-family: var(--zl-font-logo);
+  }
+
+  .font-logo-strong {
+    font-family: var(--zl-font-logo-strong);
+  }
+
+  .font-accent {
+    font-family: var(--zl-font-accent);
+  }
 }

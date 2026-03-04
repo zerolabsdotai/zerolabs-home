@@ -1,25 +1,26 @@
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
+import {
+  MarketingCTA,
+  MarketingFooter,
+  MarketingHero,
+  MarketingNav,
+  MarketingShowcase,
+  MarketingSignals,
+} from "@/components/marketing";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#0b1430] via-[#0a0f1f] to-[#04060f] text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-sky-500/30 via-blue-600/25 to-indigo-700/30 blur-3xl" />
-        <div className="absolute -bottom-56 left-1/3 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-500/20 via-blue-700/20 to-cyan-500/20 blur-3xl" />
-        <div className="absolute inset-0 bg-slate-950/70" />
-      </div>
-
-      <div className="relative z-10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-24 pt-12 sm:pt-16">
-          <Navbar />
-          <div className="mt-12 space-y-16 sm:mt-16">
-            <Hero />
-          </div>
+    <main className="min-h-screen bg-[var(--zl-snow)] text-[var(--zl-ink)]">
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_circle_at_top_right,var(--zl-steel-18),transparent_60%),radial-gradient(900px_circle_at_bottom_left,var(--zl-ash-25),transparent_55%)]" />
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-10 sm:py-14">
+          <MarketingNav />
+          <MarketingHero />
+          <MarketingSignals />
+          <MarketingShowcase />
         </div>
-        <Footer />
       </div>
+      <MarketingCTA />
+      <MarketingFooter />
     </main>
   );
 }
