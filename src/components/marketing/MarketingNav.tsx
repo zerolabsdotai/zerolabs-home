@@ -1,59 +1,69 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import { IconRobot, IconSearch } from "@/components/ui/icons";
+import { IconSearch } from "@/components/ui/icons";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { label: "Platform", href: "#platform" },
-  { label: "Signals", href: "#signals" },
-  { label: "Insights", href: "#insights" },
   { label: "Blog", href: "/blog" },
+  { label: "Insights", href: "#articles" },
+  { label: "Pricing", href: "#footer" },
 ];
 
 export default function MarketingNav() {
   return (
-    <header className="flex flex-col gap-6 rounded-[var(--zl-radius-sm)] border-[var(--zl-border-thin)] border-[color:var(--zl-ink-10)] bg-[var(--zl-snow)] p-5 shadow-[var(--zl-shadow-soft)] sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex flex-wrap items-center gap-5">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-12 items-center justify-center gap-3 rounded-[var(--zl-radius-sm)] border-[var(--zl-border-strong)] border-[color:var(--zl-mist)] bg-[var(--zl-steel)] px-4">
-            <IconRobot size={28} className="shrink-0" />
-            <span className="flex items-center">
-              <span className="font-logo text-[0.55rem] uppercase tracking-[0.45em] text-[var(--zl-mist)]">
-                zero labs
-              </span>
-              <span className="ml-2 font-logo-strong text-2xl text-[var(--zl-mist)]">
-                AI
-              </span>
-            </span>
-          </span>
-        </Link>
-        <nav className="flex flex-wrap items-center gap-3 text-[0.6rem] uppercase tracking-[0.35em] text-[var(--zl-ink-60)]">
-          {navLinks.map((link) => (
+    <header className="fixed left-0 right-0 top-4 z-50 px-4 sm:px-6 lg:px-10">
+      <div className="animate-fade-in rounded-[20px] border border-[color:var(--border)] bg-[color:var(--nav-bg)] px-4 py-3 backdrop-blur-[12px]">
+        <div className="flex flex-col gap-3 md:grid md:grid-cols-[auto_1fr_auto] md:items-center">
+          <div className="flex items-center justify-center md:justify-start">
             <Link
-              key={link.label}
-              href={link.href}
-              className="rounded-full border-[var(--zl-border-thin)] border-transparent px-3 py-2 transition hover:border-[color:var(--zl-ink-20)] hover:text-[var(--zl-ink)]"
+              href="/"
+              className="logo-wiggle glow-hover inline-flex items-center"
+              aria-label="Zero Labs home"
             >
-              {link.label}
+              <Image
+                src="/brand/Logos/AI%20robot%20logo%20dark.svg"
+                alt="Zero Labs robot logo"
+                width={40}
+                height={40}
+                className="logo-wiggle-icon h-8 w-auto sm:h-10"
+                priority
+              />
             </Link>
-          ))}
-        </nav>
-      </div>
+          </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <label className="flex items-center gap-2 rounded-full border-[var(--zl-border-thin)] border-[color:var(--zl-ink-20)] bg-[var(--zl-mist)] px-3 py-2 text-[0.6rem] uppercase tracking-[0.3em] text-[var(--zl-ink-60)]">
-          <IconSearch size={16} className="shrink-0" />
-          <input
-            type="search"
-            placeholder="Search"
-            className="w-24 bg-transparent text-[0.6rem] uppercase tracking-[0.3em] text-[var(--zl-ink)] placeholder:text-[var(--zl-ink-40)] focus:outline-none sm:w-32"
-          />
-        </label>
-        <Link
-          href="#cta"
-          className="rounded-[var(--zl-radius-pill)] border-[var(--zl-border-thin)] border-[color:var(--zl-ink)] bg-[var(--zl-ink)] px-5 py-3 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[var(--zl-mist)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
-        >
-          Request access
-        </Link>
+          <nav className="flex flex-wrap items-center justify-center gap-3 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)] md:flex-nowrap md:text-[0.6rem]">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="glow-hover rounded-full border border-transparent px-3 py-2 transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
+            <label className="glow-hover flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-[0.6rem] uppercase tracking-[0.3em] text-[color:var(--muted)]">
+              <span className="sr-only">Search</span>
+              <IconSearch size={16} className="shrink-0" />
+              <input
+                type="search"
+                placeholder="Search"
+                className="w-24 bg-transparent text-[0.6rem] uppercase tracking-[0.3em] text-[color:var(--text)] placeholder:text-[color:var(--muted)] placeholder:opacity-70 sm:w-32"
+              />
+            </label>
+            <Link
+              href="#footer"
+              className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
+            >
+              Request access
+            </Link>
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -59,7 +59,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bungeeHairline.variable} ${bungee.variable} ${lexendZetta.variable} ${holtwood.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <main id="main" tabIndex={-1}>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }

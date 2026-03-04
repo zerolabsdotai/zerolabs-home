@@ -1,26 +1,23 @@
 import {
-  MarketingCTA,
+  MarketingArticles,
   MarketingFooter,
   MarketingHero,
   MarketingNav,
-  MarketingShowcase,
-  MarketingSignals,
 } from "@/components/marketing";
+import BackToTop from "@/components/ui/BackToTop";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--zl-snow)] text-[var(--zl-ink)]">
-      <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_circle_at_top_right,var(--zl-steel-18),transparent_60%),radial-gradient(900px_circle_at_bottom_left,var(--zl-ash-25),transparent_55%)]" />
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-10 sm:py-14">
-          <MarketingNav />
-          <MarketingHero />
-          <MarketingSignals />
-          <MarketingShowcase />
-        </div>
+    <div className="relative min-h-screen text-[color:var(--text)]">
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[url('/assets/home/Background%20Image.svg')] bg-cover bg-center" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[color:var(--surface)]" />
+      <MarketingNav />
+      <div className="flex flex-col gap-12 px-4 pb-16 pt-36 sm:px-6 md:pt-32 lg:px-10">
+        <MarketingHero />
+        <MarketingArticles />
       </div>
-      <MarketingCTA />
       <MarketingFooter />
-    </main>
+      <BackToTop />
+    </div>
   );
 }
