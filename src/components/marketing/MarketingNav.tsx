@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { IconRobot, IconSearch } from "@/components/ui/icons";
+
 const navLinks = [
   { label: "Platform", href: "#platform" },
   { label: "Signals", href: "#signals" },
@@ -12,12 +14,15 @@ export default function MarketingNav() {
     <header className="flex flex-col gap-6 rounded-[var(--zl-radius-sm)] border-[var(--zl-border-thin)] border-[color:var(--zl-ink-10)] bg-[var(--zl-snow)] p-5 shadow-[var(--zl-shadow-soft)] sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-wrap items-center gap-5">
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-12 items-center justify-center rounded-[var(--zl-radius-sm)] border-[var(--zl-border-strong)] border-[color:var(--zl-mist)] bg-[var(--zl-steel)] px-4">
-            <span className="font-logo text-[0.55rem] uppercase tracking-[0.45em] text-[var(--zl-mist)]">
-              zero labs
-            </span>
-            <span className="ml-2 font-logo-strong text-2xl text-[var(--zl-mist)]">
-              AI
+          <span className="flex h-12 items-center justify-center gap-3 rounded-[var(--zl-radius-sm)] border-[var(--zl-border-strong)] border-[color:var(--zl-mist)] bg-[var(--zl-steel)] px-4">
+            <IconRobot size={28} className="shrink-0" />
+            <span className="flex items-center">
+              <span className="font-logo text-[0.55rem] uppercase tracking-[0.45em] text-[var(--zl-mist)]">
+                zero labs
+              </span>
+              <span className="ml-2 font-logo-strong text-2xl text-[var(--zl-mist)]">
+                AI
+              </span>
             </span>
           </span>
         </Link>
@@ -36,17 +41,7 @@ export default function MarketingNav() {
 
       <div className="flex flex-wrap items-center gap-3">
         <label className="flex items-center gap-2 rounded-full border-[var(--zl-border-thin)] border-[color:var(--zl-ink-20)] bg-[var(--zl-mist)] px-3 py-2 text-[0.6rem] uppercase tracking-[0.3em] text-[var(--zl-ink-60)]">
-          <svg
-            aria-hidden="true"
-            className="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="16.65" y1="16.65" x2="21" y2="21" />
-          </svg>
+          <IconSearch size={16} className="shrink-0" />
           <input
             type="search"
             placeholder="Search"
