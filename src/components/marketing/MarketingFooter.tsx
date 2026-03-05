@@ -1,44 +1,63 @@
+import Link from "next/link";
+
 const FOOTER_LINKS = [
   {
     title: "Product",
     items: [
-      "AI Customer Support",
-      "Messenger Automation",
-      "Voice AI Support",
-      "Analytics",
-      "Integrations",
+      { label: "AI Customer Support", href: "#" },
+      { label: "Messenger Automation", href: "#" },
+      { label: "Voice AI Support", href: "#" },
+      { label: "Analytics", href: "#" },
+      { label: "Integrations", href: "#" },
     ],
   },
   {
     title: "Solutions",
     items: [
-      "E-commerce",
-      "SaaS",
-      "Customer Support Teams",
-      "Startups",
-      "Enterprise",
+      { label: "E-commerce", href: "#" },
+      { label: "SaaS", href: "#" },
+      { label: "Customer Support Teams", href: "#" },
+      { label: "Startups", href: "#" },
+      { label: "Enterprise", href: "#" },
     ],
   },
   {
     title: "Resources",
-    items: ["Blog", "Case Studies", "Documentation", "API", "Help Center"],
+    items: [
+      { label: "Blog", href: "/blog" },
+      { label: "Case Studies", href: "#" },
+      { label: "Documentation", href: "#" },
+      { label: "API", href: "#" },
+      { label: "Help Center", href: "#" },
+    ],
   },
   {
     title: "Company",
-    items: ["About Us", "Mission", "Careers", "Press Kit", "Contact"],
+    items: [
+      { label: "About Us", href: "/about#about-us" },
+      { label: "Mission", href: "/about#mission" },
+      { label: "Careers", href: "#" },
+      { label: "Press Kit", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
   },
   {
     title: "Investors",
     items: [
-      "Investor Relations",
-      "Pitch Deck",
-      "Roadmap",
-      "Partnerships",
+      { label: "Investor Relations", href: "#" },
+      { label: "Pitch Deck", href: "#" },
+      { label: "Roadmap", href: "#" },
+      { label: "Partnerships", href: "#" },
     ],
   },
   {
     title: "Legal",
-    items: ["Privacy Policy", "Terms of Service", "AI Ethics", "Security"],
+    items: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+      { label: "AI Ethics", href: "#" },
+      { label: "Security", href: "#" },
+    ],
   },
 ];
 
@@ -57,13 +76,13 @@ export default function MarketingFooter() {
               </h3>
               <ul className="space-y-2 text-sm text-[color:var(--text)]">
                 {section.items.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
                       className="transition hover:text-[color:var(--brand)]"
                     >
-                      {item}
-                    </a>
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

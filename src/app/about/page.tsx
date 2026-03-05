@@ -24,7 +24,7 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="mx-auto w-full max-w-5xl">
+        <section id="about-us" className="mx-auto w-full max-w-5xl scroll-mt-28">
           <div className="glass-panel rounded-[var(--zl-radius-md)] p-6 sm:p-8">
             <h2 className="font-display text-2xl text-[color:var(--text)]">
               About Us
@@ -57,7 +57,10 @@ export default function AboutPage() {
         </section>
 
         <section className="mx-auto grid w-full max-w-5xl gap-6 sm:grid-cols-2">
-          <div className="glass-panel rounded-[var(--zl-radius-md)] p-6 sm:p-8">
+          <div
+            id="mission"
+            className="glass-panel rounded-[var(--zl-radius-md)] p-6 sm:p-8 scroll-mt-28"
+          >
             <h2 className="font-display text-2xl text-[color:var(--text)]">
               Mission
             </h2>
@@ -75,7 +78,10 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="glass-panel rounded-[var(--zl-radius-md)] p-6 sm:p-8">
+          <div
+            id="vision"
+            className="glass-panel rounded-[var(--zl-radius-md)] p-6 sm:p-8 scroll-mt-28"
+          >
             <h2 className="font-display text-2xl text-[color:var(--text)]">
               Vision
             </h2>
