@@ -93,10 +93,16 @@ export default function MarketingNav() {
               />
             </label>
             <Link
-              href="#footer"
+              href="/login"
               className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
             >
-              Request access
+              LOGIN
+            </Link>
+            <Link
+              href="/signup"
+              className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
+            >
+              SIGNUP
             </Link>
             <ThemeToggle />
           </div>
