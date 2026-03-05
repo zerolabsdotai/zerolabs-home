@@ -10,11 +10,12 @@ type ThemeAssets = {
     title: string;
     description: string;
   }[];
+  featureRailImages: string[];
 };
 
 const THEME_ASSETS: Record<ThemeMode, ThemeAssets> = {
   dark: {
-    bg: "/assets/home/AI%20ROBOT%20BG%20Dark.svg",
+    bg: "/assets/home/FULL%20ROBOT%20BODY.svg",
     banner: "/assets/home/Banner.svg",
     logo: "/brand/Logos/AI%20robot%20logo%20dark.svg",
     featureSlides: [
@@ -26,7 +27,7 @@ const THEME_ASSETS: Record<ThemeMode, ThemeAssets> = {
           "Deploy reliable AI workflows with structured guardrails and calm controls.",
       },
       {
-        image: "/assets/home/Background%20Image.svg",
+        image: "/assets/home/AI%20ROBOT%20BG%20Dark.svg",
         label: "Insight",
         title: "Operational clarity",
         description:
@@ -47,9 +48,15 @@ const THEME_ASSETS: Record<ThemeMode, ThemeAssets> = {
           "Runbooks, monitoring, and safeguards for every AI system.",
       },
     ],
+    featureRailImages: [
+      "/assets/home/Banner.svg",
+      "/assets/home/AI%20ROBOT%20BG%20Dark.svg",
+      "/assets/home/Background%20Image.svg",
+      "/assets/home/Banner.svg",
+    ],
   },
   light: {
-    bg: "/assets/home/AI%20ROBOT%20BG%20Light.svg",
+    bg: "/assets/home/FULL%20ROBOT%20BODY.svg",
     banner: "/assets/home/Banner%20Light.svg",
     logo: "/brand/Logos/AI%20robot%20logo%20light.svg",
     featureSlides: [
@@ -61,7 +68,7 @@ const THEME_ASSETS: Record<ThemeMode, ThemeAssets> = {
           "Deploy reliable AI workflows with structured guardrails and calm controls.",
       },
       {
-        image: "/assets/home/Background%20Image%20BNW.svg",
+        image: "/assets/home/AI%20ROBOT%20BG%20Light.svg",
         label: "Insight",
         title: "Operational clarity",
         description:
@@ -81,6 +88,12 @@ const THEME_ASSETS: Record<ThemeMode, ThemeAssets> = {
         description:
           "Runbooks, monitoring, and safeguards for every AI system.",
       },
+    ],
+    featureRailImages: [
+      "/assets/home/Banner%20Light.svg",
+      "/assets/home/AI%20ROBOT%20BG%20Light.svg",
+      "/assets/home/Background%20Image%20BNW.svg",
+      "/assets/home/Banner%20Light.svg",
     ],
   },
 };
