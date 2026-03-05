@@ -11,6 +11,8 @@ const USER_ROLES = new Set(["user", "customer"]);
 const ROLE_COOKIE = "zl-role";
 const USER_COOKIE = "zl-user";
 const EMAIL_COOKIE = "zl-email";
+const ACCESS_COOKIE = "zl-access";
+const REFRESH_COOKIE = "zl-refresh";
 
 const safeRedirect = (value: string | null, fallback: string) => {
   if (!value) return fallback;
@@ -86,6 +88,16 @@ export async function POST(request: Request) {
     sameSite: "lax",
   });
   response.cookies.set(EMAIL_COOKIE, email, {
+    path: "/",
+    httpOnly: true,
+    sameSite: "lax",
+  });
+  response.cookies.set(ACCESS_COOKIE, data.access_token, {
+    path: "/",
+    httpOnly: true,
+    sameSite: "lax",
+  });
+  response.cookies.set(REFRESH_COOKIE, data.refresh_token, {
     path: "/",
     httpOnly: true,
     sameSite: "lax",

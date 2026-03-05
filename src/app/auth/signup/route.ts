@@ -5,6 +5,8 @@ import { signUp, upsertProfileRole } from "@/lib/authServer";
 const ROLE_COOKIE = "zl-role";
 const USER_COOKIE = "zl-user";
 const EMAIL_COOKIE = "zl-email";
+const ACCESS_COOKIE = "zl-access";
+const REFRESH_COOKIE = "zl-refresh";
 
 const safeRedirect = (value: string | null, fallback: string) => {
   if (!value) return fallback;
@@ -67,6 +69,23 @@ export async function POST(request: Request) {
     httpOnly: true,
     sameSite: "lax",
   });
+  if (accessToken) {
+    response.cookies.set(ACCESS_COOKIE, accessToken, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+    });
+  }
+  const refreshToken =
+    (data as { refresh_token?: string }).refresh_token ||
+    (data as { session?: { refresh_token?: string } }).session?.refresh_token;
+  if (accessToken && refreshToken) {
+    response.cookies.set(REFRESH_COOKIE, refreshToken, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+    });
+  }
 
   return response;
 }

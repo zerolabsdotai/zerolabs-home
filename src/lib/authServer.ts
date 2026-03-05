@@ -101,6 +101,65 @@ export const signUp = async (
   return { data };
 };
 
+export const getUserFromAccessToken = async (
+  accessToken: string
+): Promise<{ user?: { id: string; email?: string }; error?: string }> => {
+  const config = getSupabaseConfig();
+  if (!config) {
+    return { error: "missing_config" };
+  }
+
+  if (!accessToken) {
+    return { error: "missing_access_token" };
+  }
+
+  const response = await fetch(`${config.url}/auth/v1/user`, {
+    headers: {
+      apikey: config.anonKey,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  const { data, ok } = await handleJsonResponse(response);
+  if (!ok || !data) {
+    return { error: "user_lookup_failed" };
+  }
+
+  return { user: { id: data.id, email: data.email } };
+};
+
+export const signOut = async (
+  accessToken?: string,
+  refreshToken?: string
+): Promise<{ error?: string }> => {
+  const config = getSupabaseConfig();
+  if (!config) {
+    return { error: "missing_config" };
+  }
+
+  if (!accessToken) {
+    return { error: "missing_access_token" };
+  }
+
+  const response = await fetch(`${config.url}/auth/v1/logout`, {
+    method: "POST",
+    headers: {
+      apikey: config.anonKey,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      refresh_token: refreshToken,
+    }),
+  });
+
+  if (!response.ok) {
+    return { error: "logout_failed" };
+  }
+
+  return {};
+};
+
 export const fetchProfileRole = async (
   userId: string,
   accessToken: string

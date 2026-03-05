@@ -4,6 +4,7 @@ export { default as MarketingFeatureCarousel } from "./MarketingFeatureCarousel"
 export { default as MarketingFooter } from "./MarketingFooter";
 export { default as MarketingHero } from "./MarketingHero";
 export { default as MarketingNav } from "./MarketingNav";
+export { default as MarketingNavLogo } from "./MarketingNavLogo";
 export { default as MarketingNewsletterSubscribe } from "./MarketingNewsletterSubscribe";
 export { default as MarketingShowcase } from "./MarketingShowcase";
 export { default as MarketingSignals } from "./MarketingSignals";

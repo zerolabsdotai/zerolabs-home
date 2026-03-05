@@ -1,12 +1,10 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 import { IconSearch } from "@/components/ui/icons";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { getThemeAssets } from "@/lib/themeAssets";
-import { useThemeMode } from "@/lib/useThemeMode";
+import { getUserFromAccessToken } from "@/lib/authServer";
+import MarketingNavLogo from "@/components/marketing/MarketingNavLogo";
 
 const navLinks = [
   { label: "Platform", href: "/#platform" },
@@ -22,29 +20,27 @@ const productLinks = [
   { label: "Integrations", href: "/#platform" },
 ];
 
-export default function MarketingNav() {
-  const theme = useThemeMode();
-  const assets = getThemeAssets(theme);
+export default async function MarketingNav() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("zl-access")?.value;
+  const fallbackUser = cookieStore.get("zl-user")?.value;
+  let isLoggedIn = false;
+
+  if (accessToken) {
+    const { user } = await getUserFromAccessToken(accessToken);
+    isLoggedIn = Boolean(user);
+  }
+
+  if (!isLoggedIn && fallbackUser) {
+    isLoggedIn = true;
+  }
 
   return (
     <header className="fixed left-0 right-0 top-4 z-50 px-4 sm:px-6 lg:px-10">
       <div className="animate-fade-in rounded-[20px] border border-[color:var(--border)] bg-[color:var(--nav-bg)] px-4 py-3 backdrop-blur-[12px]">
         <div className="flex flex-col gap-3 md:grid md:grid-cols-[auto_1fr_auto] md:items-center">
           <div className="flex items-center justify-center md:justify-start">
-            <Link
-              href="/"
-              className="logo-wiggle glow-hover inline-flex items-center"
-              aria-label="Zero Labs home"
-            >
-              <Image
-                src={assets.logo}
-                alt="Zero Labs robot logo"
-                width={40}
-                height={40}
-                className="logo-wiggle-icon h-8 w-auto sm:h-10"
-                priority
-              />
-            </Link>
+            <MarketingNavLogo />
           </div>
 
           <nav className="flex flex-wrap items-center justify-center gap-3 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)] md:flex-nowrap md:text-[0.6rem]">
@@ -92,18 +88,29 @@ export default function MarketingNav() {
                 className="w-24 bg-transparent text-[0.6rem] uppercase tracking-[0.3em] text-[color:var(--text)] placeholder:text-[color:var(--muted)] placeholder:opacity-70 sm:w-32"
               />
             </label>
-            <Link
-              href="/login"
-              className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
-            >
-              LOGIN
-            </Link>
-            <Link
-              href="/signup"
-              className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
-            >
-              SIGNUP
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/logout"
+                className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
+              >
+                LOGOUT
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
+                >
+                  LOGIN
+                </Link>
+                <Link
+                  href="/signup"
+                  className="glow-hover rounded-[var(--zl-radius-pill)] border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-5 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-[color:var(--cta-text)] shadow-[var(--zl-shadow-soft)] transition hover:shadow-[var(--zl-shadow-accent)]"
+                >
+                  SIGNUP
+                </Link>
+              </>
+            )}
             <ThemeToggle />
           </div>
         </div>
