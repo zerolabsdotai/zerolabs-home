@@ -48,11 +48,15 @@ export default function MarketingNav() {
           </div>
 
           <nav className="flex flex-wrap items-center justify-center gap-3 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)] md:flex-nowrap md:text-[0.6rem]">
-            <details className="group relative">
-              <summary className="glow-hover cursor-pointer list-none rounded-full border border-transparent px-3 py-2 transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]">
+            <div className="group relative">
+              <button
+                type="button"
+                aria-haspopup="true"
+                className="glow-hover cursor-pointer rounded-full border border-transparent px-3 py-2 transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+              >
                 Product
-              </summary>
-              <div className="static z-50 mt-2 w-full rounded-[20px] border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] shadow-[var(--zl-shadow-soft)] backdrop-blur md:absolute md:left-1/2 md:top-full md:mt-3 md:w-60 md:-translate-x-1/2">
+              </button>
+              <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-60 -translate-x-1/2 rounded-[20px] border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] opacity-0 shadow-[var(--zl-shadow-soft)] backdrop-blur transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                 <ul className="flex flex-col gap-1">
                   {productLinks.map((item) => (
                     <li key={item.label}>
@@ -66,7 +70,7 @@ export default function MarketingNav() {
                   ))}
                 </ul>
               </div>
-            </details>
+            </div>
             {navLinks.map((link) => (
               <Link
                 key={link.label}
