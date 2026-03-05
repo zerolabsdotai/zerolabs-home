@@ -1,6 +1,6 @@
 import {
   MarketingArticles,
-  MarketingFeatureSlider,
+  MarketingFeatureCarousel,
   MarketingFooter,
   MarketingHero,
   MarketingNav,
@@ -19,7 +19,7 @@ export default function Home() {
         <MarketingArticles />
       </div>
       <div className="pb-16">
-        <MarketingFeatureSlider />
+        <MarketingFeatureCarousel />
       </div>
       <MarketingFooter />
       <BackToTop />

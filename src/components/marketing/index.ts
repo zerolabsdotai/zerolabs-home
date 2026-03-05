@@ -1,6 +1,6 @@
 export { default as MarketingCTA } from "./MarketingCTA";
 export { default as MarketingArticles } from "./MarketingArticles";
-export { default as MarketingFeatureSlider } from "./MarketingFeatureSlider";
+export { default as MarketingFeatureCarousel } from "./MarketingFeatureCarousel";
 export { default as MarketingFooter } from "./MarketingFooter";
 export { default as MarketingHero } from "./MarketingHero";
 export { default as MarketingNav } from "./MarketingNav";

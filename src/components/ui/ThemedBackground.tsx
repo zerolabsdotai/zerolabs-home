@@ -9,7 +9,7 @@ export default function ThemedBackground() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 -z-20 bg-cover bg-center"
+      className="page-background pointer-events-none fixed inset-0 -z-20"
       style={{ backgroundImage: `url('${assets.bg}')` }}
       aria-hidden="true"
     />
