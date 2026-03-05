@@ -10,8 +10,7 @@ import { useThemeMode } from "@/lib/useThemeMode";
 
 const navLinks = [
   { label: "Platform", href: "/#platform" },
-  { label: "Blog", href: "/blog" },
-  { label: "Insights", href: "/#articles" },
+  { label: "Insights", href: "/blog" },
   { label: "Pricing", href: "/#footer" },
 ];
 
