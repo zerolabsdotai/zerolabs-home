@@ -4,6 +4,7 @@ import {
   MarketingFooter,
   MarketingHero,
   MarketingNav,
+  MarketingNewsletterInsights,
 } from "@/components/marketing";
 import BackToTop from "@/components/ui/BackToTop";
 import ThemedBackground from "@/components/ui/ThemedBackground";
@@ -18,6 +19,7 @@ export default function Home() {
         <MarketingHero />
         <MarketingArticles />
       </div>
+      <MarketingNewsletterInsights />
       <div className="pb-16">
         <MarketingFeatureCarousel />
       </div>
