@@ -68,6 +68,9 @@ export async function generateMetadata({
   return {
     title,
     description: post.summary,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title,
       description: post.summary,
@@ -89,6 +92,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const category = post.category ?? "AI Automation";
+
   return (
     <div className="relative min-h-screen text-[color:var(--text)]">
       <ThemedBackground />
@@ -96,24 +101,42 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <MarketingNav />
 
       <main className="flex flex-col gap-10 px-4 pb-20 pt-36 sm:px-6 md:pt-32 lg:px-10">
-        <div className="mx-auto w-full max-w-4xl">
+        <div className="mx-auto w-full max-w-5xl">
           <article className="space-y-8">
-            <header className="glass-panel rounded-[36px] p-6 shadow-[var(--zl-shadow-soft)] sm:p-8">
+            <header className="glass-panel rounded-[36px] p-6 shadow-[var(--zl-shadow-soft)] sm:p-10">
               <div className="flex flex-wrap items-center gap-3 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--muted)]">
-                <span className="h-1 w-6 rounded-full bg-[color:var(--brand)]" />
-                <span>{post.date}</span>
+                <span className="rounded-full border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] px-3 py-1 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--text)]">
+                  {category}
+                </span>
+                <span className="rounded-full border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] px-3 py-1 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--text)]">
+                  {post.date}
+                </span>
               </div>
-              <h1 className="mt-4 font-display text-3xl text-[color:var(--text)] sm:text-4xl lg:text-5xl">
+              <h1 className="mt-6 font-display text-4xl tracking-tight text-[color:var(--text)] sm:text-5xl lg:text-6xl">
                 {post.title}
               </h1>
-              <p className="mt-4 max-w-3xl text-sm text-[color:var(--muted)] sm:text-base">
+              <p
+                className="mt-4 max-w-3xl text-[16px] leading-relaxed md:text-[18px]"
+                style={{ color: "var(--reading-text)" }}
+              >
                 {post.summary}
               </p>
             </header>
 
-            <div className="glass-panel rounded-[36px] p-6 shadow-[var(--zl-shadow-soft)] sm:p-10">
-              <div className="prose max-w-none prose-lg prose-headings:font-semibold prose-headings:text-[color:var(--text)] prose-p:text-[color:var(--muted)] prose-strong:text-[color:var(--text)] prose-a:text-[color:var(--brand)] prose-a:transition prose-a:duration-200 prose-a:hover:text-[color:var(--text)] prose-hr:border-[color:var(--glass-border)]">
-                <MDXRemote source={post.content} />
+            <div className="mx-auto w-full max-w-3xl">
+              <div
+                className="rounded-[28px] border p-6 shadow-[var(--zl-shadow-soft)] backdrop-blur-md sm:p-10"
+                style={{
+                  background: "var(--reading-bg)",
+                  borderColor: "var(--reading-border)",
+                }}
+              >
+                <div
+                  className="prose max-w-none text-[16px] leading-relaxed md:text-[18px] prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[color:var(--text)] prose-p:leading-relaxed prose-p:text-[color:var(--reading-text)] prose-strong:text-[color:var(--text)] prose-a:text-[color:var(--brand)] prose-a:transition prose-a:duration-200 prose-a:hover:text-[color:var(--text)] prose-hr:border-[color:var(--glass-border)]"
+                  style={{ textShadow: "var(--reading-shadow)" }}
+                >
+                  <MDXRemote source={post.content} />
+                </div>
               </div>
             </div>
           </article>
