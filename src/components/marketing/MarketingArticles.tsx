@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const articles = [
   {
     title: "Operational clarity",
@@ -36,12 +38,12 @@ export default function MarketingArticles() {
                   {article.description}
                 </p>
               </div>
-              <button
-                type="button"
+              <Link
+                href="/blog"
                 className="glow-hover mt-auto w-fit rounded-full border border-[color:var(--border)] bg-[color:var(--cta-bg)] px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--cta-text)]"
               >
                 Read more...
-              </button>
+              </Link>
             </div>
           </article>
         ))}
