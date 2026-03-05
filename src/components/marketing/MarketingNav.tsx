@@ -9,10 +9,10 @@ import { getThemeAssets } from "@/lib/themeAssets";
 import { useThemeMode } from "@/lib/useThemeMode";
 
 const navLinks = [
-  { label: "Platform", href: "#platform" },
+  { label: "Platform", href: "/#platform" },
   { label: "Blog", href: "/blog" },
-  { label: "Insights", href: "#articles" },
-  { label: "Pricing", href: "#footer" },
+  { label: "Insights", href: "/#articles" },
+  { label: "Pricing", href: "/#footer" },
 ];
 
 export default function MarketingNav() {
