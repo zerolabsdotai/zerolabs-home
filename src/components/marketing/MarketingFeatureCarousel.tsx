@@ -123,11 +123,14 @@ export default function MarketingFeatureCarousel({
 
   const imageHeightClass = isCompact
     ? "h-[200px] sm:h-[230px] lg:h-[260px]"
-    : "h-[300px] sm:h-[360px] lg:h-[430px]";
+    : "h-[280px] sm:h-[320px] lg:h-[360px]";
+
+  const headerWrapperClass = isCompact ? "content-frame" : "w-full px-4 sm:px-6 lg:px-10";
+  const carouselWrapperClass = isCompact ? "content-frame mt-6" : "w-full px-0 mt-6";
 
   return (
     <section className="w-full pb-12 pt-4">
-      <div className="content-frame">
+      <div className={headerWrapperClass}>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="text-left">
             <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
@@ -141,7 +144,7 @@ export default function MarketingFeatureCarousel({
       </div>
 
       <div
-        className="content-frame mt-6"
+        className={carouselWrapperClass}
         role="region"
         aria-roledescription="carousel"
         aria-label={title}
@@ -153,14 +156,18 @@ export default function MarketingFeatureCarousel({
             ref={trackRef}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4"
           >
-            {featureSlides.map((slide, index) => (
-              <article
-                key={`${slide.title}-${index}`}
-                data-slide
-                className="glass-panel snap-center rounded-[28px] shadow-[var(--zl-shadow-soft)]"
-                style={{ minWidth: "100%" }}
-              >
-                {isCompact ? (
+            {featureSlides.map((slide, index) => {
+              const cardClass = isCompact
+                ? "glass-panel"
+                : "bg-transparent";
+
+              return (
+                <article
+                  key={`${slide.title}-${index}`}
+                  data-slide
+                  className={`${cardClass} snap-center rounded-[28px]`}
+                  style={{ minWidth: "100%" }}
+                >
                   <div className="flex h-full flex-col">
                     <div
                       className={`relative w-full ${imageHeightClass} bg-[color:var(--surface-2)]`}
@@ -169,10 +176,30 @@ export default function MarketingFeatureCarousel({
                         src={slide.image}
                         alt={slide.title}
                         fill
-                        sizes="(max-width: 768px) 92vw, 1120px"
+                        sizes={isCompact ? "(max-width: 768px) 92vw, 1120px" : "100vw"}
                         className="object-contain p-4 sm:p-6"
                         priority={index === 0}
                       />
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-2">
+                        <button
+                          type="button"
+                          aria-label="Previous feature slide"
+                          onClick={() => handleStep("prev")}
+                          disabled={currentIndex === 0}
+                          className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          Prev
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Next feature slide"
+                          onClick={() => handleStep("next")}
+                          disabled={currentIndex === maxIndex}
+                          className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          Next
+                        </button>
+                      </div>
                     </div>
                     <div className="p-4 sm:p-5">
                       <p className="text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
@@ -192,70 +219,9 @@ export default function MarketingFeatureCarousel({
                       </button>
                     </div>
                   </div>
-                ) : (
-                  <div className="relative w-full overflow-hidden rounded-[var(--zl-radius-lg)]">
-                    <div
-                      className={`relative w-full ${imageHeightClass} bg-[color:var(--surface-2)]`}
-                    >
-                      <Image
-                        src={slide.image}
-                        alt={slide.title}
-                        fill
-                        sizes="100vw"
-                        className="object-contain"
-                        priority={index === 0}
-                      />
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 z-10 flex items-end">
-                      <div
-                        className="pointer-events-auto m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] p-4 text-[color:var(--text)] backdrop-blur-[8px] sm:m-6 sm:p-5"
-                        style={{
-                          background:
-                            "color-mix(in srgb, var(--glass-bg) 45%, transparent)",
-                        }}
-                      >
-                        <p className="text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
-                          {slide.label}
-                        </p>
-                        <h3 className="mt-2 text-xl font-semibold">
-                          {slide.title}
-                        </h3>
-                        <p className="mt-2 text-sm text-[color:var(--muted)]">
-                          {slide.description}
-                        </p>
-                        <button
-                          type="button"
-                          className="glow-hover mt-4 w-fit rounded-full border border-[color:var(--glass-border)] bg-[color:var(--cta-bg)] px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--cta-text)]"
-                        >
-                          Learn more
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </article>
-            ))}
-          </div>
-
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-2">
-            <button
-              type="button"
-              aria-label="Previous feature slide"
-              onClick={() => handleStep("prev")}
-              disabled={currentIndex === 0}
-              className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              aria-label="Next feature slide"
-              onClick={() => handleStep("next")}
-              disabled={currentIndex === maxIndex}
-              className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Next
-            </button>
+                </article>
+              );
+            })}
           </div>
         </div>
 
