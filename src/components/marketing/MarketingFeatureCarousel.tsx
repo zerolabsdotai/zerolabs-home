@@ -108,7 +108,7 @@ export default function MarketingFeatureCarousel() {
                       aria-label="Previous feature slide"
                       onClick={() => handleStep("prev")}
                       disabled={currentIndex === 0}
-                      className="glow-hover glass-panel absolute left-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                      className="glow-hover glass-panel absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Prev
                     </button>
@@ -117,17 +117,17 @@ export default function MarketingFeatureCarousel() {
                       aria-label="Next feature slide"
                       onClick={() => handleStep("next")}
                       disabled={currentIndex === maxIndex}
-                      className="glow-hover glass-panel absolute right-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                      className="glow-hover glass-panel absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Next
                     </button>
                   </div>
-                  <div className="absolute inset-0 flex items-end">
+                  <div className="pointer-events-none absolute inset-0 z-10 flex items-end">
                     <div
-                      className="m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] p-4 text-[color:var(--text)] backdrop-blur sm:m-6 sm:p-5"
+                      className="pointer-events-auto m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] p-4 text-[color:var(--text)] backdrop-blur-[8px] sm:m-6 sm:p-5"
                       style={{
                         background:
-                          "color-mix(in srgb, var(--glass-bg) 65%, transparent)",
+                          "color-mix(in srgb, var(--glass-bg) 45%, transparent)",
                       }}
                     >
                       <p className="text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
