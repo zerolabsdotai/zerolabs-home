@@ -75,26 +75,6 @@ export default function MarketingFeatureCarousel() {
               Explore what Zero Labs can deliver.
             </h2>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Previous feature slide"
-              onClick={() => handleStep("prev")}
-              disabled={currentIndex === 0}
-              className="glow-hover rounded-full border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] px-3 py-2 text-xs uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              aria-label="Next feature slide"
-              onClick={() => handleStep("next")}
-              disabled={currentIndex === maxIndex}
-              className="glow-hover rounded-full border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] px-3 py-2 text-xs uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
         </div>
       </div>
 
@@ -123,9 +103,33 @@ export default function MarketingFeatureCarousel() {
                       className="object-contain"
                       priority={index === 0}
                     />
+                    <button
+                      type="button"
+                      aria-label="Previous feature slide"
+                      onClick={() => handleStep("prev")}
+                      disabled={currentIndex === 0}
+                      className="glow-hover glass-panel absolute left-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Prev
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next feature slide"
+                      onClick={() => handleStep("next")}
+                      disabled={currentIndex === maxIndex}
+                      className="glow-hover glass-panel absolute right-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Next
+                    </button>
                   </div>
                   <div className="absolute inset-0 flex items-end">
-                    <div className="m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-4 text-[color:var(--text)] backdrop-blur sm:m-6 sm:p-5">
+                    <div
+                      className="m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] p-4 text-[color:var(--text)] backdrop-blur sm:m-6 sm:p-5"
+                      style={{
+                        background:
+                          "color-mix(in srgb, var(--glass-bg) 65%, transparent)",
+                      }}
+                    >
                       <p className="text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
                         {slide.label}
                       </p>
