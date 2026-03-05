@@ -28,9 +28,9 @@ export default function MarketingNewsletterInsights() {
 
   return (
     <section className="w-full py-12">
-      <div className="content-frame">
+      <div className="w-full px-[20px]">
         <div className="glass-panel w-full rounded-[36px] p-6 text-left text-[color:var(--text)] shadow-[var(--zl-shadow-soft)] sm:p-8">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="mx-auto grid w-full max-w-[1200px] gap-6 md:grid-cols-2">
             <div>
                 <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
                   Newsletter
