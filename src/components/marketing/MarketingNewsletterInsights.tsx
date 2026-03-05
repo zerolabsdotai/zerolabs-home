@@ -28,11 +28,10 @@ export default function MarketingNewsletterInsights() {
 
   return (
     <section className="w-full py-12">
-      <div className="w-full px-[20px]">
-        <div className="mx-auto w-full max-w-[1200px]">
-          <div className="glass-panel rounded-[36px] p-6 text-left text-[color:var(--text)] shadow-[var(--zl-shadow-soft)] sm:p-8">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
+      <div className="content-frame">
+        <div className="glass-panel w-full rounded-[36px] p-6 text-left text-[color:var(--text)] shadow-[var(--zl-shadow-soft)] sm:p-8">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
                 <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
                   Newsletter
                 </p>
@@ -85,47 +84,46 @@ export default function MarketingNewsletterInsights() {
                 <p className="mt-2 text-xs text-[color:var(--muted)]">
                   No spam. Unsubscribe anytime.
                 </p>
-              </div>
+            </div>
 
-              <div className="rounded-[28px] border border-[color:var(--glass-border)] bg-[color:var(--surface)] p-5 sm:p-6">
-                <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
-                  AI Impact Snapshot
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-[color:var(--text)]">
-                  AI Impact Snapshot
-                </h3>
-                <p className="mt-2 text-sm text-[color:var(--muted)]">
-                  Typical profit uplift reported by teams adopting AI automation.
-                </p>
+            <div className="rounded-[28px] border border-[color:var(--glass-border)] bg-[color:var(--surface)] p-5 sm:p-6">
+              <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
+                AI Impact Snapshot
+              </p>
+              <h3 className="mt-2 text-lg font-semibold text-[color:var(--text)]">
+                AI Impact Snapshot
+              </h3>
+              <p className="mt-2 text-sm text-[color:var(--muted)]">
+                Typical profit uplift reported by teams adopting AI automation.
+              </p>
 
-                <div className="mt-4 space-y-3 text-sm">
-                  {chartRows.map((row) => (
-                    <div key={row.label} className="space-y-1">
-                      <div className="flex items-center justify-between text-[color:var(--text)]">
-                        <span>{row.label}</span>
-                        <span>{row.value}%</span>
-                      </div>
-                      <div className="h-2 w-full rounded-full bg-[color:var(--surface-2)]">
-                        <div
-                          className="h-2 rounded-full bg-[color:var(--brand)]"
-                          style={{ width: `${row.value}%` }}
-                        />
-                      </div>
+              <div className="mt-4 space-y-3 text-sm">
+                {chartRows.map((row) => (
+                  <div key={row.label} className="space-y-1">
+                    <div className="flex items-center justify-between text-[color:var(--text)]">
+                      <span>{row.label}</span>
+                      <span>{row.value}%</span>
                     </div>
-                  ))}
-                </div>
-
-                <p className="mt-4 text-xs text-[color:var(--muted)]">
-                  Benchmarks are illustrative; results vary by implementation.
-                </p>
-
-                <Link
-                  href="/insights"
-                  className="glow-hover mt-4 inline-flex w-fit rounded-full border border-[color:var(--glass-border)] bg-[color:var(--cta-bg)] px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--cta-text)]"
-                >
-                  See More...
-                </Link>
+                    <div className="h-2 w-full rounded-full bg-[color:var(--surface-2)]">
+                      <div
+                        className="h-2 rounded-full bg-[color:var(--brand)]"
+                        style={{ width: `${row.value}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
+
+              <p className="mt-4 text-xs text-[color:var(--muted)]">
+                Benchmarks are illustrative; results vary by implementation.
+              </p>
+
+              <Link
+                href="/insights"
+                className="glow-hover mt-4 inline-flex w-fit rounded-full border border-[color:var(--glass-border)] bg-[color:var(--cta-bg)] px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--cta-text)]"
+              >
+                See More...
+              </Link>
             </div>
           </div>
         </div>
