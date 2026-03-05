@@ -54,7 +54,7 @@ export default function MarketingNav() {
                 aria-haspopup="true"
                 className="glow-hover cursor-pointer rounded-full border border-transparent px-3 py-2 transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
               >
-                Product
+                PRODUCT
               </button>
               <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-60 -translate-x-1/2 rounded-[20px] border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] opacity-0 shadow-[var(--zl-shadow-soft)] backdrop-blur transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                 <ul className="flex flex-col gap-1">
