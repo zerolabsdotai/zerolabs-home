@@ -3,7 +3,6 @@ import {
   MarketingFeatureCarousel,
   MarketingFooter,
   MarketingHero,
-  MarketingImageSlider,
   MarketingNav,
 } from "@/components/marketing";
 import BackToTop from "@/components/ui/BackToTop";
@@ -21,9 +20,6 @@ export default function Home() {
       </div>
       <div className="pb-16">
         <MarketingFeatureCarousel />
-      </div>
-      <div className="pb-12">
-        <MarketingImageSlider />
       </div>
       <MarketingFooter />
       <BackToTop />
