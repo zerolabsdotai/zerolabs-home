@@ -74,10 +74,14 @@ export default function Navbar() {
         </div>
 
         <div className="w-full md:w-auto">
+          <label htmlFor="primary-search" className="sr-only">
+            Search
+          </label>
           <input
+            id="primary-search"
             type="search"
             placeholder="Search"
-            className="h-9 w-full rounded-full border border-white/10 bg-white/5 px-4 text-xs text-white/80 placeholder:text-white/40 transition focus:border-white/40 focus:outline-none md:w-56"
+            className="h-9 w-full rounded-full border border-white/10 bg-white/5 px-4 text-xs text-white/80 placeholder:text-white/40 transition focus:border-white/40 md:w-56"
           />
         </div>
       </div>
