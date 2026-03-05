@@ -371,7 +371,7 @@ body {
   }
 
   .page-background {
-    background-size: min(1100px, 85vw) auto;
+    background-size: 392px 494.15px;
     background-position: center;
     background-repeat: no-repeat;
   }
@@ -381,8 +381,32 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
-  .page-background {
-    background-size: min(1280px, 70vw) auto;
+@keyframes marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 28s linear infinite;
+  animation-play-state: paused;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
   }
 }

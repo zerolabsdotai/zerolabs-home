@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getThemeAssets } from "@/lib/themeAssets";
 import { useThemeMode } from "@/lib/useThemeMode";
@@ -14,11 +14,6 @@ export default function MarketingFeatureCarousel() {
   const { featureSlides } = getThemeAssets(theme);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const prefersReducedMotion = useMemo(() => {
-    if (typeof window === "undefined") return true;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -60,7 +55,7 @@ export default function MarketingFeatureCarousel() {
     const slideWidth = first.offsetWidth + gap;
     track.scrollTo({
       left: slideWidth * index,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
+      behavior: "auto",
     });
   };
 
@@ -106,8 +101,7 @@ export default function MarketingFeatureCarousel() {
       <div className="relative mt-6">
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-10"
-          style={{ scrollBehavior: prefersReducedMotion ? "auto" : "smooth" }}
+          className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-10 scroll-smooth"
         >
           {featureSlides.map((slide, index) => (
             <article
