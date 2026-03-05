@@ -8,10 +8,14 @@
   --text: #1f2428;
   --muted: #4b5c6b;
   --border: rgba(31, 36, 40, 0.12);
-  --surface: rgba(255, 255, 255, 0.5);
+  --page-overlay: rgba(255, 255, 255, 0.06);
+  --surface: rgba(255, 255, 255, 0.12);
   --surface-2: rgba(47, 78, 107, 0.12);
-  --nav-bg: rgba(255, 255, 255, 0.2);
-  --card-bg: rgba(47, 78, 107, 0.5);
+  --nav-bg: rgba(230, 235, 238, 0.18);
+  --card-bg: rgba(230, 235, 238, 0.16);
+  --glass-bg: rgba(230, 235, 238, 0.16);
+  --glass-border: rgba(31, 36, 40, 0.1);
+  --glass-blur: 18px;
   --brand: #2f4e6b;
   --brand-2: #0b1f3b;
   --cta-bg: #d9d9d9;
@@ -72,10 +76,14 @@
   --text: #e6ebee;
   --muted: #a7b0b7;
   --border: rgba(230, 235, 238, 0.2);
-  --surface: rgba(11, 31, 59, 0.5);
+  --page-overlay: rgba(11, 31, 59, 0.12);
+  --surface: rgba(11, 31, 59, 0.16);
   --surface-2: rgba(47, 78, 107, 0.4);
-  --nav-bg: rgba(11, 31, 59, 0.2);
-  --card-bg: rgba(47, 78, 107, 0.5);
+  --nav-bg: rgba(11, 31, 59, 0.22);
+  --card-bg: rgba(47, 78, 107, 0.2);
+  --glass-bg: rgba(47, 78, 107, 0.2);
+  --glass-border: rgba(230, 235, 238, 0.18);
+  --glass-blur: 18px;
   --brand: #a7b0b7;
   --brand-2: #2f4e6b;
   --cta-bg: #d9d9d9;
@@ -116,10 +124,14 @@
     --text: #e6ebee;
     --muted: #a7b0b7;
     --border: rgba(230, 235, 238, 0.2);
-    --surface: rgba(11, 31, 59, 0.5);
+    --page-overlay: rgba(11, 31, 59, 0.12);
+    --surface: rgba(11, 31, 59, 0.16);
     --surface-2: rgba(47, 78, 107, 0.4);
-    --nav-bg: rgba(11, 31, 59, 0.2);
-    --card-bg: rgba(47, 78, 107, 0.5);
+    --nav-bg: rgba(11, 31, 59, 0.22);
+    --card-bg: rgba(47, 78, 107, 0.2);
+    --glass-bg: rgba(47, 78, 107, 0.2);
+    --glass-border: rgba(230, 235, 238, 0.18);
+    --glass-blur: 18px;
     --brand: #a7b0b7;
     --brand-2: #2f4e6b;
     --cta-bg: #d9d9d9;
@@ -336,6 +348,13 @@ body {
 
   .glow-hover:hover {
     box-shadow: 0 0 24px var(--glow);
+  }
+
+  .glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
   }
 
   .logo-wiggle:hover .logo-wiggle-icon {

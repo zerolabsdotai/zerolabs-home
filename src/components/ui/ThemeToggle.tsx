@@ -20,7 +20,7 @@ const getSnapshot = () => {
     : "light";
 };
 
-const getServerSnapshot = () => "light";
+const getServerSnapshot = () => "dark";
 
 const subscribe = (callback: () => void) => {
   if (typeof window === "undefined") {

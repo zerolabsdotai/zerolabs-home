@@ -23,7 +23,7 @@ export default function MarketingArticles() {
         {articles.map((article, index) => (
           <article
             key={article.title}
-            className="glow-hover animate-articles-in rounded-[36px] border border-[color:var(--border)] bg-[color:var(--card-bg)] p-6 text-[color:var(--text)] shadow-[var(--zl-shadow-soft)]"
+            className="glow-hover animate-articles-in glass-panel rounded-[36px] p-6 text-[color:var(--text)] shadow-[var(--zl-shadow-soft)]"
             style={{ animationDelay: `${index * 0.12}s` }}
           >
             <div className="flex h-full flex-col gap-4">

@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { IconSearch } from "@/components/ui/icons";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { getThemeAssets } from "@/lib/themeAssets";
+import { useThemeMode } from "@/lib/useThemeMode";
 
 const navLinks = [
   { label: "Platform", href: "#platform" },
@@ -12,6 +16,9 @@ const navLinks = [
 ];
 
 export default function MarketingNav() {
+  const theme = useThemeMode();
+  const assets = getThemeAssets(theme);
+
   return (
     <header className="fixed left-0 right-0 top-4 z-50 px-4 sm:px-6 lg:px-10">
       <div className="animate-fade-in rounded-[20px] border border-[color:var(--border)] bg-[color:var(--nav-bg)] px-4 py-3 backdrop-blur-[12px]">
@@ -23,7 +30,7 @@ export default function MarketingNav() {
               aria-label="Zero Labs home"
             >
               <Image
-                src="/brand/Logos/AI%20robot%20logo%20dark.svg"
+                src={assets.logo}
                 alt="Zero Labs robot logo"
                 width={40}
                 height={40}
