@@ -29,6 +29,18 @@ export default function MarketingHero() {
           Learn More...
         </button>
       </div>
+      <div className="-mx-4 sm:-mx-6 lg:-mx-10">
+        <div className="w-full bg-transparent">
+          <div className="flex justify-center py-4 sm:py-5">
+            <button
+              type="button"
+              className="glow-hover rounded-full border border-transparent bg-[color:var(--cta-bg)] px-6 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--cta-text)]"
+            >
+              Subscribe to Newsletter
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
