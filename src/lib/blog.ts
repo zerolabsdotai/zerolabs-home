@@ -7,6 +7,7 @@ export type BlogPost = {
   title: string;
   date: string;
   summary: string;
+  category?: string;
   content: string;
 };
 
@@ -66,10 +67,11 @@ export function getPostBySlug(slug?: string): BlogPost | null {
 
   const source = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(source);
-  const { title, date, summary } = data as {
+  const { title, date, summary, category } = data as {
     title: string;
     date: string;
     summary: string;
+    category?: string;
   };
 
   return {
@@ -77,6 +79,7 @@ export function getPostBySlug(slug?: string): BlogPost | null {
     title,
     date,
     summary,
+    category,
     content,
   };
 }

@@ -10,9 +10,16 @@ import { useThemeMode } from "@/lib/useThemeMode";
 
 const navLinks = [
   { label: "Platform", href: "/#platform" },
-  { label: "Blog", href: "/blog" },
-  { label: "Insights", href: "/#articles" },
+  { label: "Insights", href: "/blog" },
   { label: "Pricing", href: "/#footer" },
+];
+
+const productLinks = [
+  { label: "Messenger AI Automation", href: "/#platform" },
+  { label: "Voice AI Support", href: "/#platform" },
+  { label: "Knowledge Base Intelligence", href: "/#platform" },
+  { label: "Analytics & Insights", href: "/#platform" },
+  { label: "Integrations", href: "/#platform" },
 ];
 
 export default function MarketingNav() {
@@ -41,6 +48,25 @@ export default function MarketingNav() {
           </div>
 
           <nav className="flex flex-wrap items-center justify-center gap-3 text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)] md:flex-nowrap md:text-[0.6rem]">
+            <details className="group relative">
+              <summary className="glow-hover cursor-pointer list-none rounded-full border border-transparent px-3 py-2 transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]">
+                Product
+              </summary>
+              <div className="static z-50 mt-2 w-full rounded-[20px] border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] p-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] shadow-[var(--zl-shadow-soft)] backdrop-blur md:absolute md:left-1/2 md:top-full md:mt-3 md:w-60 md:-translate-x-1/2">
+                <ul className="flex flex-col gap-1">
+                  {productLinks.map((item) => (
+                    <li key={item.label}>
+                      <Link
+                        href={item.href}
+                        className="block rounded-[14px] px-3 py-2 transition hover:bg-[color:var(--surface)]"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
             {navLinks.map((link) => (
               <Link
                 key={link.label}

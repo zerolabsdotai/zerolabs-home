@@ -1,10 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties, type KeyboardEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 
 import { getThemeAssets } from "@/lib/themeAssets";
 import { useThemeMode } from "@/lib/useThemeMode";
+
+type FeatureCarouselVariant = "hero" | "compact";
+
+type MarketingFeatureCarouselProps = {
+  title?: string;
+  subtitle?: string;
+  variant?: FeatureCarouselVariant;
+};
 
 const clampIndex = (value: number, max: number) =>
   Math.max(0, Math.min(value, max));
@@ -26,25 +39,75 @@ const useReducedMotion = () => {
   return prefersReducedMotion;
 };
 
-export default function MarketingFeatureCarousel() {
+export default function MarketingFeatureCarousel({
+  title = "Feature Content",
+  subtitle = "Explore what Zero Labs can deliver.",
+  variant = "hero",
+}: MarketingFeatureCarouselProps) {
   const theme = useThemeMode();
   const { featureSlides } = getThemeAssets(theme);
   const prefersReducedMotion = useReducedMotion();
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const maxIndex = Math.max(0, featureSlides.length - 1);
   const currentIndex = clampIndex(activeIndex, maxIndex);
+  const isCompact = variant === "compact";
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let frame: number | null = null;
+    const updateIndex = () => {
+      frame = null;
+      const first = track.querySelector<HTMLElement>("[data-slide]");
+      if (!first) return;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "0");
+      const slideWidth = first.offsetWidth + gap;
+      const idx = Math.round(track.scrollLeft / slideWidth);
+      setActiveIndex(clampIndex(idx, maxIndex));
+    };
+
+    const handleScroll = () => {
+      if (frame != null) return;
+      frame = window.requestAnimationFrame(updateIndex);
+    };
+
+    track.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      track.removeEventListener("scroll", handleScroll);
+      if (frame != null) {
+        cancelAnimationFrame(frame);
+      }
+    };
+  }, [maxIndex]);
 
   if (!featureSlides.length) {
     return null;
   }
 
-  const goTo = (index: number) => {
+  const scrollToIndex = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const first = track.querySelector<HTMLElement>("[data-slide]");
+    if (!first) return;
+    const style = window.getComputedStyle(track);
+    const gap = parseFloat(style.columnGap || style.gap || "0");
+    const slideWidth = first.offsetWidth + gap;
+    track.scrollTo({
+      left: slideWidth * index,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
     setActiveIndex(clampIndex(index, maxIndex));
   };
 
   const handleStep = (direction: "prev" | "next") => {
-    goTo(currentIndex + (direction === "prev" ? -1 : 1));
+    const next =
+      direction === "prev" ? currentIndex - 1 : currentIndex + 1;
+    scrollToIndex(clampIndex(next, maxIndex));
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -58,82 +121,91 @@ export default function MarketingFeatureCarousel() {
     }
   };
 
-  const trackStyle: CSSProperties = {
-    transform: `translateX(-${currentIndex * 100}%)`,
-    transition: prefersReducedMotion ? "none" : "transform 500ms ease",
-  };
+  const imageHeightClass = isCompact
+    ? "h-[200px] sm:h-[230px] lg:h-[260px]"
+    : "h-[280px] sm:h-[320px] lg:h-[360px]";
+
+  const headerWrapperClass = isCompact ? "content-frame" : "w-full px-4 sm:px-6 lg:px-10";
+  const carouselWrapperClass = isCompact ? "content-frame mt-6" : "w-full px-0 mt-6";
 
   return (
-    <section className="w-full pb-16 pt-6">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-10">
+    <section className="w-full pb-12 pt-4">
+      <div className={headerWrapperClass}>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+          <div className="text-left">
             <p className="text-[0.6rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
-              Feature Content
+              {title}
             </p>
             <h2 className="font-display text-2xl text-[color:var(--text)] sm:text-3xl">
-              Explore what Zero Labs can deliver.
+              {subtitle}
             </h2>
           </div>
         </div>
       </div>
 
       <div
-        className="relative mt-6 w-full"
+        className={carouselWrapperClass}
         role="region"
         aria-roledescription="carousel"
-        aria-label="Feature content carousel"
+        aria-label={title}
         tabIndex={0}
         onKeyDown={handleKeyDown}
       >
-        <div className="overflow-hidden">
-          <div className="flex w-full" style={trackStyle}>
-            {featureSlides.map((slide, index) => (
-              <div
-                key={`${slide.title}-${index}`}
-                className="w-full shrink-0 px-4 sm:px-6 lg:px-10"
-              >
-                <article className="glass-panel relative w-full overflow-hidden rounded-[var(--zl-radius-lg)] shadow-[var(--zl-shadow-soft)]">
-                  <div className="relative w-full aspect-[3/1] sm:aspect-[5/2] lg:aspect-[3/1] bg-[color:var(--surface-2)]">
-                    <Image
-                      src={slide.image}
-                      alt={slide.title}
-                      fill
-                      sizes="100vw"
-                      className="object-contain"
-                      priority={index === 0}
-                    />
-                    <button
-                      type="button"
-                      aria-label="Previous feature slide"
-                      onClick={() => handleStep("prev")}
-                      disabled={currentIndex === 0}
-                      className="glow-hover glass-panel absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      Prev
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="Next feature slide"
-                      onClick={() => handleStep("next")}
-                      disabled={currentIndex === maxIndex}
-                      className="glow-hover glass-panel absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      Next
-                    </button>
-                  </div>
-                  <div className="pointer-events-none absolute inset-0 z-10 flex items-end">
+        <div className="relative">
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4"
+          >
+            {featureSlides.map((slide, index) => {
+              const cardClass = isCompact
+                ? "glass-panel"
+                : "bg-transparent";
+
+              return (
+                <article
+                  key={`${slide.title}-${index}`}
+                  data-slide
+                  className={`${cardClass} snap-center rounded-[28px]`}
+                  style={{ minWidth: "100%" }}
+                >
+                  <div className="flex h-full flex-col">
                     <div
-                      className="pointer-events-auto m-4 max-w-[360px] rounded-[24px] border border-[color:var(--glass-border)] p-4 text-[color:var(--text)] backdrop-blur-[8px] sm:m-6 sm:p-5"
-                      style={{
-                        background:
-                          "color-mix(in srgb, var(--glass-bg) 45%, transparent)",
-                      }}
+                      className={`relative w-full ${imageHeightClass} bg-[color:var(--surface-2)]`}
                     >
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        fill
+                        sizes={isCompact ? "(max-width: 768px) 92vw, 1120px" : "100vw"}
+                        className="object-contain p-4 sm:p-6"
+                        priority={index === 0}
+                      />
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-2">
+                        <button
+                          type="button"
+                          aria-label="Previous feature slide"
+                          onClick={() => handleStep("prev")}
+                          disabled={currentIndex === 0}
+                          className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          Prev
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Next feature slide"
+                          onClick={() => handleStep("next")}
+                          disabled={currentIndex === maxIndex}
+                          className="glow-hover glass-panel pointer-events-auto rounded-full px-3 py-2 text-[0.55rem] uppercase tracking-[0.3em] text-[color:var(--text)] backdrop-blur disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-4 sm:p-5">
                       <p className="text-[0.55rem] uppercase tracking-[0.35em] text-[color:var(--muted)]">
                         {slide.label}
                       </p>
-                      <h3 className="mt-2 text-xl font-semibold">
+                      <h3 className="mt-2 text-base font-semibold sm:text-lg">
                         {slide.title}
                       </h3>
                       <p className="mt-2 text-sm text-[color:var(--muted)]">
@@ -148,18 +220,18 @@ export default function MarketingFeatureCarousel() {
                     </div>
                   </div>
                 </article>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2">
+        <div className="mt-3 flex items-center justify-center gap-2">
           {featureSlides.map((_, index) => (
             <button
               key={`dot-${index}`}
               type="button"
               aria-label={`Go to slide ${index + 1}`}
-              onClick={() => goTo(index)}
+              onClick={() => scrollToIndex(index)}
               className={`h-2 w-2 rounded-full transition ${
                 index === currentIndex
                   ? "bg-[color:var(--text)]"

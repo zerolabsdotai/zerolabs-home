@@ -18,6 +18,10 @@
   --glass-blur: 18px;
   --footer-bg: rgba(230, 235, 238, 0.24);
   --footer-border: rgba(31, 36, 40, 0.12);
+  --reading-bg: rgba(255, 255, 255, 0.7);
+  --reading-border: rgba(31, 36, 40, 0.12);
+  --reading-text: rgba(10, 20, 30, 0.88);
+  --reading-shadow: none;
   --brand: #2f4e6b;
   --brand-2: #0b1f3b;
   --cta-bg: #d9d9d9;
@@ -88,6 +92,10 @@
   --glass-blur: 18px;
   --footer-bg: rgba(11, 31, 59, 0.34);
   --footer-border: rgba(230, 235, 238, 0.18);
+  --reading-bg: rgba(10, 25, 45, 0.55);
+  --reading-border: rgba(230, 235, 238, 0.16);
+  --reading-text: rgba(255, 255, 255, 0.92);
+  --reading-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   --brand: #a7b0b7;
   --brand-2: #2f4e6b;
   --cta-bg: #d9d9d9;
@@ -138,6 +146,10 @@
     --glass-blur: 18px;
     --footer-bg: rgba(11, 31, 59, 0.34);
     --footer-border: rgba(230, 235, 238, 0.18);
+    --reading-bg: rgba(10, 25, 45, 0.55);
+    --reading-border: rgba(230, 235, 238, 0.16);
+    --reading-text: rgba(255, 255, 255, 0.92);
+    --reading-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     --brand: #a7b0b7;
     --brand-2: #2f4e6b;
     --cta-bg: #d9d9d9;
@@ -379,6 +391,37 @@ body {
   .logo-wiggle:hover .logo-wiggle-icon {
     animation: logo-wiggle 0.6s ease-in-out;
   }
+
+  .content-frame {
+    width: min(calc(100vw - 40px), 1120px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog-prose-panel {
+    font-family: Arial, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      Roboto, Helvetica, sans-serif;
+    text-align: left;
+    max-width: 780px;
+  }
+
+  .blog-prose-panel * {
+    text-align: left;
+  }
+
+  .blog-prose-panel p {
+    margin-bottom: 18px;
+  }
+
+  .blog-prose-panel h2 {
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+
+  .blog-prose-panel h3 {
+    margin-top: 22px;
+    margin-bottom: 8px;
+  }
 }
 
 @keyframes marquee-slide {
@@ -409,4 +452,12 @@ body {
   .marquee-track {
     animation: none !important;
   }
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
 }
